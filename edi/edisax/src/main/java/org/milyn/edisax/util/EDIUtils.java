@@ -83,6 +83,20 @@ public class EDIUtils {
      * @return an array of split edi-sequences, null if null string input.
      */
     public static String[] split(String value, String delimiter, String escape) {
+    	return split(value, delimiter, null, escape);
+    }
+    
+    /**
+     * Splits a String by delimiter as long as delimiter does not follow an escape sequence.
+     * The split method follows the same behavior as the method splitPreserveAllTokens(String, String)
+     * in {@link org.apache.commons.lang.StringUtils}.
+     *
+     * @param value the string to split, may be null.
+     * @param delimiter the delimiter sequence. A null delimiter splits on whitespace.
+     * @param escape the escape sequence. A null escape is allowed,  and result will be consistent with the splitPreserveAllTokens method.
+     * @return an array of split edi-sequences, null if null string input.
+     */
+    public static String[] split(String value, String delimiter, String delimiter2, String escape) {
 
         // A null input string returns null
         if (value == null) {
@@ -100,7 +114,7 @@ public class EDIUtils {
         }
 
         List<CharSequence> charSequences = new ArrayList<CharSequence>();
-        readSequenceStructure(value, delimiter, escape, charSequences);
+        readSequenceStructure(value, delimiter, delimiter2, escape, charSequences);
 
         return putCharacterSequenceIntoResult(charSequences);
     }
@@ -422,10 +436,11 @@ public class EDIUtils {
      * @param escape the characters defining the escape
      * @param result a lis CharSequence.
      */
-    private static void readSequenceStructure(String value, String delimiter, String escape, List<CharSequence> result) {
+    private static void readSequenceStructure(String value, String delimiter, String delimiter2, String escape, List<CharSequence> result) {
         StringBuilder stringBuilder = new StringBuilder();
         int escapeLength = escape == null ? 0 : escape.length();
         int delimiterLength = delimiter == null ? 0 : delimiter.length();
+        int delimiter2Length = delimiter2 == null ? 0 : delimiter2.length();
 
         for (int j = 0; j < value.length(); j++) {
             char theChar = value.charAt(j);
@@ -440,6 +455,14 @@ public class EDIUtils {
                 }
                 result.add(new CharSequence(delimiter, CharSequenceTypeEnum.DELIMITER));
                 continue;
+            } else if (builderEndsWith(stringBuilder, delimiter2)) {
+                    stringBuilder.setLength(curTokenLength - delimiter2Length);
+                    if (stringBuilder.length() > 0) {
+                        result.add(new CharSequence(stringBuilder.toString(), CharSequenceTypeEnum.PLAIN));
+                        stringBuilder.setLength(0);
+                    }
+                    result.add(new CharSequence(delimiter2, CharSequenceTypeEnum.DELIMITER));
+                    continue;
             } else if (builderEndsWith(stringBuilder, escape)) {
                 stringBuilder.setLength(curTokenLength - escapeLength);
                 if (stringBuilder.length() > 0) {

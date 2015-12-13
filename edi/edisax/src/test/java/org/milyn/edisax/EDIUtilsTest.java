@@ -106,7 +106,8 @@ public class EDIUtilsTest {
 
     @Test
     public void test_concatAndTruncate() {
-        Delimiters delims = UNEdifactInterchangeParser.defaultUNEdifactDelimiters;
+    	// TODO is there need to test delimiters handling for 4.1?
+        Delimiters delims = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3;
 
         assertEquals("ab", EDIUtils.concatAndTruncate(CollectionsUtil.toList("a", "b", "+:+"), DelimiterType.SEGMENT, delims));
         assertEquals("a+:+b", EDIUtils.concatAndTruncate(CollectionsUtil.toList("a", "+:+", "b", "+:+"), DelimiterType.SEGMENT, delims));

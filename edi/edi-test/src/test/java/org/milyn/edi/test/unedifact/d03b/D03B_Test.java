@@ -32,6 +32,7 @@ import java.io.IOException;
 public class D03B_Test {
 
     private static EdifactDirTestHarness d03bHarness = new EdifactDirTestHarness(new File("src/test/resources/d03b.zip"), "PAXLST");
+    private static EdifactDirTestHarness d03bHarness2 = new EdifactDirTestHarness(new File("src/test/resources/d03b.zip"), "ORDERS");
 
     @Test
     public void test_PAXLST() throws IOException {
@@ -41,6 +42,11 @@ public class D03B_Test {
     @Test
     public void test_PAXLST_test_XML() throws IOException, SAXException {
         d03bHarness.assertXMLOK(getClass().getResourceAsStream("PAXLST.edi"), getClass().getResourceAsStream("PAXLST.xml"));
+    }
+
+    @Test
+    public void test_ORDERS_test_XML() throws IOException, SAXException {
+    	d03bHarness2.assertXMLOK(getClass().getResourceAsStream("ORDERS.edi"), getClass().getResourceAsStream("ORDERS.xml"));
     }
 
     @Test

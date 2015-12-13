@@ -55,7 +55,8 @@ public class UNEdifactInterchangeParser implements XMLReader, NamespaceDeclarati
 
     private Map<String, Boolean> features = new HashMap<String, Boolean>();
 	
-	public static final Delimiters defaultUNEdifactDelimiters = new Delimiters().setSegment("'").setField("+").setComponent(":").setEscape("?").setDecimalSeparator(".");
+	public static final Delimiters defaultUNEdifactDelimitersVer3 = new Delimiters().setSegment("'").setField("+").setComponent(":").setEscape("?").setDecimalSeparator(".");
+	public static final Delimiters defaultUNEdifactDelimitersVer41 = new Delimiters().setSegment("'").setField("+").setComponent(":").setEscape("?").setDecimalSeparator(".").setRepetionSeparator("*");
 	
 	/**
 	 * By default we are using {@link LazyMappingsRegistry} instance
@@ -79,7 +80,7 @@ public class UNEdifactInterchangeParser implements XMLReader, NamespaceDeclarati
 
         try {
             ControlBlockHandlerFactory handlerFactory = new UNEdifact41ControlBlockHandlerFactory(hierarchyChangeListener);
-	        BufferedSegmentReader segmentReader = new BufferedSegmentReader(unedifactInterchange, defaultUNEdifactDelimiters);
+	        BufferedSegmentReader segmentReader = new BufferedSegmentReader(unedifactInterchange, defaultUNEdifactDelimitersVer3);
 	        boolean validate = getFeature(EDIParser.FEATURE_VALIDATE);
 	        String segCode;
 	        

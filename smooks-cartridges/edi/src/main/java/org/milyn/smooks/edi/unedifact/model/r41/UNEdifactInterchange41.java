@@ -15,15 +15,15 @@
 */
 package org.milyn.smooks.edi.unedifact.model.r41;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.List;
+
 import org.milyn.assertion.AssertArgument;
 import org.milyn.edisax.model.internal.Delimiters;
 import org.milyn.edisax.unedifact.UNEdifactInterchangeParser;
 import org.milyn.smooks.edi.EDIWritable;
 import org.milyn.smooks.edi.unedifact.model.UNEdifactInterchange;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.List;
 
 /**
  * UN/EDIFACT message interchange (Version 4, Release 1).
@@ -129,18 +129,22 @@ public class UNEdifactInterchange41 implements UNEdifactInterchange {
      */
     public void write(Writer writer, Delimiters delimiters) throws IOException {
         AssertArgument.isNotNull(writer, "writer");
+        Delimiters defaultDelimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3;
+        if ("4".equals(getInterchangeHeader().getSyntaxIdentifier().getVersionNum())) {
+        	defaultDelimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer41;
+        }
 
-        if(delimiters != null && delimiters != UNEdifactInterchangeParser.defaultUNEdifactDelimiters) {
+        if(delimiters != null && delimiters != defaultDelimiters) {
             // Write a UNA segment definition...
             writer.append("UNA");
             writer.append(delimiters.getComponent());
             writer.append(delimiters.getField());
             writer.append(delimiters.getDecimalSeparator());
             writer.append(delimiters.getEscape());
-            writer.append(" ");
+            writer.append(delimiters.getRepetitionSeparator() == null ? " " : delimiters.getRepetitionSeparator());
             writer.append(delimiters.getSegment());
         } else {
-            delimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimiters;
+            delimiters = defaultDelimiters;
         }
 
         if(interchangeHeader != null) {

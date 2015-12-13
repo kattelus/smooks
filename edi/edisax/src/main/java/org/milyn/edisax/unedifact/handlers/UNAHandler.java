@@ -47,8 +47,12 @@ public class UNAHandler implements ControlBlockHandler {
 		delimiters.setDecimalSeparator(segmentReader.read(1));
 		// 4th char is the escape char ("release")...
 		delimiters.setEscape(    segmentReader.read(1));
-		// 5th char is reserved for future use...
-		segmentReader.read(1);
+		// 5th char is reserved repetion separator (in syntax 4)...
+		String repetionSeparator = segmentReader.read(1);
+		if (!repetionSeparator.trim().isEmpty()) {
+			// Some other than space so assume we use repetion separator otherwise just use syntax version 3 way
+			delimiters.setRepetionSeparator(repetionSeparator);
+		}
 		// 6th char is the segment delimiter...
 		delimiters.setSegment(   segmentReader.read(1));
 

@@ -27,11 +27,22 @@ public class DelimitersTest {
 
     @Test
     public void test_escape() {
-        Delimiters delimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimiters;
+        Delimiters delimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3;
 
-        assertEquals("hello world", delimiters.escape("hello world"));
-        assertEquals("hello world?'s", delimiters.escape("hello world's"));
-        assertEquals("hello world??", delimiters.escape("hello world?"));
-        assertEquals("hello ?+ world??", delimiters.escape("hello + world?"));
+        assertEquals("hello world*", delimiters.escape("hello world*"));
+        assertEquals("hello world?'s*", delimiters.escape("hello world's*"));
+        assertEquals("hello world??*", delimiters.escape("hello world?*"));
+        assertEquals("hello ?+ world??*", delimiters.escape("hello + world?*"));
     }
+
+    @Test
+    public void test_escape_41() {
+        Delimiters delimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer41;
+
+        assertEquals("hello world?*", delimiters.escape("hello world*"));
+        assertEquals("hello world?'s?*", delimiters.escape("hello world's*"));
+        assertEquals("hello world???*", delimiters.escape("hello world?*"));
+        assertEquals("hello ?+ world???*", delimiters.escape("hello + world?*"));
+    }
+
 }

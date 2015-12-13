@@ -224,7 +224,8 @@ public class UnEdifactSpecificationReader implements EdiSpecificationReader {
             edifactModel = UnEdifactDefinitionReader.parse(dataISR, compositeISR, segmentISR, useShortName);
             edifactModel.setDescription((Description) EDIUtils.MODEL_SET_DEFINITIONS_DESCRIPTION.clone());
             edifactModel.getSegments().setXmltag("DefinitionMap");
-            edifactModel.setDelimiters(UNEdifactInterchangeParser.defaultUNEdifactDelimiters);
+            // TODO is it correct to use ver 3?
+            edifactModel.setDelimiters(UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3);
         } finally {
             if (dataISR != null) {
                 dataISR.close();

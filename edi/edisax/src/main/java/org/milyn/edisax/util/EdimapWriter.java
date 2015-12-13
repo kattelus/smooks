@@ -76,6 +76,7 @@ public class EdimapWriter {
         }
     }
 
+    /* TODO dead code?
     public static void write(Segment segment, Writer writer) throws IOException {
         Edimap ediMap = new Edimap();
 
@@ -88,6 +89,7 @@ public class EdimapWriter {
 
         write(ediMap, writer);
     }
+    */
 
     private void write(Edimap edimap) {
         Element edimapEl = newElement("edimap", doc);

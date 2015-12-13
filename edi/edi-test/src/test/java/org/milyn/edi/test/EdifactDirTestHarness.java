@@ -15,29 +15,6 @@
 */
 package org.milyn.edi.test;
 
-import org.apache.xerces.jaxp.validation.XMLSchemaFactory;
-import org.custommonkey.xmlunit.XMLUnit;
-import org.milyn.Smooks;
-import org.milyn.archive.Archive;
-import org.milyn.archive.ArchiveClassLoader;
-import org.milyn.assertion.AssertArgument;
-import org.milyn.classpath.CascadingClassLoaderSet;
-import org.milyn.ect.EdiConvertionTool;
-import org.milyn.edisax.util.IllegalNameException;
-import org.milyn.ejc.EJCExecutor;
-import org.milyn.io.StreamUtils;
-import org.milyn.payload.StringResult;
-import org.milyn.payload.StringSource;
-import org.milyn.xml.EclipseFragmentXMLValidator;
-import org.milyn.smooks.edi.unedifact.model.UNEdifactInterchange;
-import org.milyn.smooks.edi.unedifact.model.UNEdifactInterchangeFactory;
-import org.milyn.test.ant.AntRunner;
-import org.milyn.util.CollectionsUtil;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,6 +26,32 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.zip.ZipInputStream;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+
+import org.apache.xerces.jaxp.validation.XMLSchemaFactory;
+import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.Assert;
+import org.milyn.Smooks;
+import org.milyn.archive.Archive;
+import org.milyn.archive.ArchiveClassLoader;
+import org.milyn.assertion.AssertArgument;
+import org.milyn.classpath.CascadingClassLoaderSet;
+import org.milyn.ect.EdiConvertionTool;
+import org.milyn.edisax.util.IllegalNameException;
+import org.milyn.ejc.EJCExecutor;
+import org.milyn.io.StreamUtils;
+import org.milyn.payload.StringResult;
+import org.milyn.payload.StringSource;
+import org.milyn.smooks.edi.unedifact.model.UNEdifactInterchange;
+import org.milyn.smooks.edi.unedifact.model.UNEdifactInterchangeFactory;
+import org.milyn.test.ant.AntRunner;
+import org.milyn.util.CollectionsUtil;
+import org.milyn.xml.EclipseFragmentXMLValidator;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * EDIFACT Directory (.zip Specification file) test harness.
@@ -212,9 +215,11 @@ public class EdifactDirTestHarness implements UNEdifactInterchangeFactory {
 
         fromUNEdifact(edifactIn, xmlResult);
 
-//        System.out.println(xmlResult);
         XMLUnit.setIgnoreWhitespace(true);
-        XMLUnit.compareXML(expectedXML, xmlResult.getResult());
+        Diff diff = XMLUnit.compareXML(expectedXML, xmlResult.getResult());
+        System.out.println("Result:\n" + xmlResult.getResult());
+        System.out.println("Diff:\n" + diff.toString());
+        Assert.assertTrue(diff.identical());
 
         if (validate) {
             ClassLoader origTCCL = Thread.currentThread().getContextClassLoader();

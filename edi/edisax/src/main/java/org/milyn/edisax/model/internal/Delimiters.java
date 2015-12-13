@@ -28,6 +28,7 @@ public class Delimiters {
     private String subComponent;
     private String escape;
     private String decimalSeparator;
+    private String repetitionSeparator;
     private volatile char[] segmentDelimiter;
     private boolean ignoreCRLF;
     private Set<Character> delimiterChars = new LinkedHashSet<Character>();
@@ -57,6 +58,16 @@ public class Delimiters {
 		return fieldRepeat;
 	}
 
+    public Delimiters setRepetionSeparator(String value) {
+        this.repetitionSeparator = value;
+        initDelimiterChars();
+        return this;
+    }
+    
+    public String getRepetitionSeparator() {
+		return repetitionSeparator;
+	}
+   
     public Delimiters setFieldRepeat(String fieldRepeat) {
 		this.fieldRepeat = fieldRepeat;
         initDelimiterChars();
@@ -231,6 +242,9 @@ public class Delimiters {
         if(escape != null) {
             delimiterChars.add(escape.charAt(0));
         }
+        if(repetitionSeparator != null) {
+            delimiterChars.add(repetitionSeparator.charAt(0));
+        }
     }
 
     private boolean equals(String delimiter, char c) {
@@ -248,6 +262,7 @@ public class Delimiters {
         delimiters.escape = escape;
         delimiters.decimalSeparator = decimalSeparator;
         delimiters.segmentDelimiter = segmentDelimiter;
+        delimiters.repetitionSeparator = repetitionSeparator;
         delimiters.ignoreCRLF = ignoreCRLF;
         delimiters.delimiterChars.addAll(delimiterChars);
         return delimiters;

@@ -22,9 +22,11 @@ import java.util.Map;
 
 import org.milyn.edisax.BufferedSegmentReader;
 import org.milyn.edisax.EDIParseException;
+import org.milyn.edisax.unedifact.UNEdifactInterchangeParser;
 import org.milyn.edisax.util.EDIUtils;
 import org.milyn.edisax.interchange.ControlBlockHandler;
 import org.milyn.edisax.interchange.InterchangeContext;
+import org.milyn.edisax.model.internal.Delimiters;
 import org.milyn.edisax.model.internal.Segment;
 import org.xml.sax.SAXException;
 
@@ -63,6 +65,21 @@ public class UNBHandler implements ControlBlockHandler {
 			changeReadEncoding(syntaxIdComponents[3], interchangeContext.getSegmentReader());
 		}
 		
+		boolean delimitersChanged = false;
+		if("4".equals(syntaxIdComponents[1])) {
+			Delimiters delimiters = interchangeContext.getDelimiters();
+			if (delimiters.getRepetitionSeparator() != null) {
+				interchangeContext.pushDelimiters(
+						((Delimiters)delimiters.clone())
+						.setRepetionSeparator(
+								UNEdifactInterchangeParser
+								.defaultUNEdifactDelimitersVer41
+								.getRepetitionSeparator()));
+				
+				delimitersChanged = true;
+			}
+	    }
+		
         while(true) {
 	        String segCode = segmentReader.peek(3, true);
 
@@ -77,6 +94,8 @@ public class UNBHandler implements ControlBlockHandler {
                 throw new EDIParseException("Unexpected end of UN/EDIFACT data stream.  If stream was reset (e.g. after read charset was changed), please make sure underlying stream was properly reset.");
 	        }
         }
+        
+        if(delimitersChanged) interchangeContext.popDelimiters();
 	}
 
 	private void changeReadEncoding(String code, BufferedSegmentReader bufferedSegmentReader) throws EDIParseException, IOException {

@@ -1,7 +1,7 @@
 <env:unEdifact xmlns:env="urn:org.milyn.edi.unedifact.v41">
 	<env:UNB>
 		<env:syntaxIdentifier>
-			<env:id>UNOC</env:id>
+			<env:id>UNOY</env:id>
 			<env:versionNum>3</env:versionNum>
 		</env:syntaxIdentifier>
 		<env:sender>
@@ -158,7 +158,7 @@
 			</invoic:Segment_Group_8>
 			<invoic:Segment_Group_22>
 				<invoic:LIN>
-					<c:e1082>1</c:e1082>
+					<c:e1082>1.0</c:e1082>
 				</invoic:LIN>
 				<invoic:MEA>
 					<c:e6311>PD</c:e6311>
@@ -167,7 +167,7 @@
 					</c:C502>
 					<c:C174>
 						<c:e6411>KGM</c:e6411>
-						<c:e6314>177</c:e6314>
+						<c:e6314>177.0</c:e6314>
 					</c:C174>
 				</invoic:MEA>
 				<invoic:MEA>
@@ -177,13 +177,13 @@
 					</c:C502>
 					<c:C174>
 						<c:e6411>MTQ</c:e6411>
-						<c:e6314>0.864</c:e6314>
+						<c:e6314>0.86</c:e6314>
 					</c:C174>
 				</invoic:MEA>
 				<invoic:QTY>
 					<c:C186>
 						<c:e6063>100</c:e6063>
-						<c:e6060>288</c:e6060>
+						<c:e6060>288.0</c:e6060>
 						<c:e6411>KGM</c:e6411>
 					</c:C186>
 				</invoic:QTY>
@@ -198,7 +198,7 @@
 					<invoic:MOA>
 						<c:C516>
 							<c:e5025>203</c:e5025>
-							<c:e5004>1736</c:e5004>
+							<c:e5004>1736.0</c:e5004>
 						</c:C516>
 					</invoic:MOA>
 				</invoic:Segment_Group_23>
@@ -220,7 +220,7 @@
 				</invoic:Segment_Group_26>
 				<invoic:Segment_Group_27>
 					<invoic:PAC>
-						<c:e7224>1</c:e7224>
+						<c:e7224>1.0</c:e7224>
 					</invoic:PAC>
 				</invoic:Segment_Group_27>
 				<invoic:Segment_Group_29>
@@ -302,7 +302,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>8</c:e5025>
-								<c:e5004>1233</c:e5004>
+								<c:e5004>1233.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_38>
@@ -339,7 +339,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>8</c:e5025>
-								<c:e5004>27</c:e5004>
+								<c:e5004>27.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_38>
@@ -376,7 +376,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>8</c:e5025>
-								<c:e5004>260</c:e5004>
+								<c:e5004>260.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_38>
@@ -394,7 +394,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>124</c:e5025>
-								<c:e5004>65</c:e5004>
+								<c:e5004>65.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_40>
@@ -413,7 +413,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>8</c:e5025>
-								<c:e5004>162</c:e5004>
+								<c:e5004>162.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_38>
@@ -450,7 +450,7 @@
 						<invoic:MOA>
 							<c:C516>
 								<c:e5025>8</c:e5025>
-								<c:e5004>54</c:e5004>
+								<c:e5004>54.0</c:e5004>
 							</c:C516>
 						</invoic:MOA>
 					</invoic:Segment_Group_38>
@@ -492,7 +492,7 @@
 				<invoic:MOA>
 					<c:C516>
 						<c:e5025>9</c:e5025>
-						<c:e5004>2170</c:e5004>
+						<c:e5004>2170.0</c:e5004>
 					</c:C516>
 				</invoic:MOA>
 			</invoic:Segment_Group_45>
@@ -500,7 +500,7 @@
 				<invoic:MOA>
 					<c:C516>
 						<c:e5025>125</c:e5025>
-						<c:e5004>1736</c:e5004>
+						<c:e5004>1736.0</c:e5004>
 					</c:C516>
 				</invoic:MOA>
 			</invoic:Segment_Group_45>
@@ -508,7 +508,7 @@
 				<invoic:MOA>
 					<c:C516>
 						<c:e5025>176</c:e5025>
-						<c:e5004>434</c:e5004>
+						<c:e5004>434.0</c:e5004>
 					</c:C516>
 				</invoic:MOA>
 			</invoic:Segment_Group_45>
@@ -526,13 +526,13 @@
 				<invoic:MOA>
 					<c:C516>
 						<c:e5025>125</c:e5025>
-						<c:e5004>1736</c:e5004>
+						<c:e5004>1736.0</c:e5004>
 					</c:C516>
 				</invoic:MOA>
 				<invoic:MOA>
 					<c:C516>
 						<c:e5025>176</c:e5025>
-						<c:e5004>434</c:e5004>
+						<c:e5004>434.0</c:e5004>
 					</c:C516>
 				</invoic:MOA>
 			</invoic:Segment_Group_47>

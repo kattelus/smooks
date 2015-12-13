@@ -13,7 +13,7 @@
 	See the GNU Lesser General Public License for more details:
 	http://www.gnu.org/licenses/lgpl.txt
 */
-package org.milyn.csv;
+package org.milyn.csv.MILYN_642;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.xml.transform.stream.StreamSource;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import org.milyn.FilterSettings;
@@ -31,6 +32,7 @@ import org.milyn.SmooksException;
 import org.milyn.SmooksUtil;
 import org.milyn.cdr.SmooksConfigurationException;
 import org.milyn.container.ExecutionContext;
+import org.milyn.csv.CSVRecordParserConfigurator;
 import org.milyn.flatfile.Binding;
 import org.milyn.flatfile.BindingType;
 import org.milyn.payload.JavaResult;

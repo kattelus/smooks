@@ -58,7 +58,8 @@ public class EDITypeConverter {
         StringWriter ediWriter = new StringWriter();
 
         try {
-            ediMessage.write(ediWriter, UNEdifactInterchangeParser.defaultUNEdifactDelimiters);
+        	// TODO version 3 syntax used?
+            ediMessage.write(ediWriter, UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3);
             return ediWriter.toString();
         } finally {
             ediWriter.flush();

@@ -27,8 +27,8 @@ import java.math.BigDecimal;
  */
 public class DABigDecimalDecoderTest {
 
-    private static Delimiters DOT_DEC_DELIMITERS =   UNEdifactInterchangeParser.defaultUNEdifactDelimiters;
-    private static Delimiters COMMA_DEC_DELIMITERS = ((Delimiters)UNEdifactInterchangeParser.defaultUNEdifactDelimiters.clone()).setDecimalSeparator(",");
+    private static Delimiters DOT_DEC_DELIMITERS =   UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3;
+    private static Delimiters COMMA_DEC_DELIMITERS = ((Delimiters)UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3.clone()).setDecimalSeparator(",");
 
     @Test
     public void test_decode_decimal_point_dot() {

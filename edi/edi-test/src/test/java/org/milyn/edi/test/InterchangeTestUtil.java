@@ -43,11 +43,11 @@ import java.util.List;
  */
 public class InterchangeTestUtil {
 
-    private static MessageBuilder defaultUNAMessageBuilder = new MessageBuilder("org.milyn", UNEdifactInterchangeParser.defaultUNEdifactDelimiters.getField(), UNEdifactInterchangeParser.defaultUNEdifactDelimiters);
-    private static MessageBuilder commaDecimalSepUNAMessageBuilder = new MessageBuilder("org.milyn", UNEdifactInterchangeParser.defaultUNEdifactDelimiters.getField(), UNEdifactInterchangeParser.defaultUNEdifactDelimiters);
+    private static MessageBuilder defaultUNAMessageBuilder = new MessageBuilder("org.milyn", UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3.getField(), UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3);
+    private static MessageBuilder commaDecimalSepUNAMessageBuilder = new MessageBuilder("org.milyn", UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3.getField(), UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3);
 
     static {
-        Delimiters delimiters = ((Delimiters) UNEdifactInterchangeParser.defaultUNEdifactDelimiters.clone()).setDecimalSeparator(",");
+        Delimiters delimiters = ((Delimiters) UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3.clone()).setDecimalSeparator(",");
         commaDecimalSepUNAMessageBuilder = new MessageBuilder("org.milyn", delimiters.getField(), delimiters);
     }
 

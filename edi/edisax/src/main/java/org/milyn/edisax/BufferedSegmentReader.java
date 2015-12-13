@@ -410,7 +410,7 @@ public class BufferedSegmentReader {
     	assertCurrentSegmentExists();
 
         if(currentSegmentFields == null) {
-              currentSegmentFields = EDIUtils.split(segmentBuffer.toString(), currentDelimiters.getField(), currentDelimiters.getEscape());
+              currentSegmentFields = EDIUtils.split(segmentBuffer.toString(), currentDelimiters.getField(), currentDelimiters.getRepetitionSeparator(), currentDelimiters.getEscape());
 
               // If the segment delimiter is a LF, strip off any preceding CR characters...
               if(currentDelimiters.getSegment().equals("\n")) {

@@ -2,7 +2,7 @@
 	<env:UNB xmlns:env="urn:org.milyn.edi.unedifact.v41">
 		<env:syntaxIdentifier>
 			<env:id>UNOA</env:id>
-			<env:versionNum>4</env:versionNum>
+			<env:versionNum>3</env:versionNum>
 		</env:syntaxIdentifier>
 		<env:sender>
 			<env:id>LOCK</env:id>

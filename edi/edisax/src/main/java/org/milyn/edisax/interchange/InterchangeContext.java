@@ -154,6 +154,10 @@ public class InterchangeContext {
         segmentReader.popDelimiters();
     }
 
+    public Delimiters getDelimiters() {
+        return segmentReader.getDelimiters();
+    }    
+
     /**
      * Returns an instance of {@link MappingsRegistry}
      *
