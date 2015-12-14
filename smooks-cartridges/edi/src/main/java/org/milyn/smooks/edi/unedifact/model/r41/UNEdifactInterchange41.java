@@ -130,7 +130,9 @@ public class UNEdifactInterchange41 implements UNEdifactInterchange {
     public void write(Writer writer, Delimiters delimiters) throws IOException {
         AssertArgument.isNotNull(writer, "writer");
         Delimiters defaultDelimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer3;
-        if ("4".equals(getInterchangeHeader().getSyntaxIdentifier().getVersionNum())) {
+        if (getInterchangeHeader() != null &&
+        	getInterchangeHeader().getSyntaxIdentifier() != null &&
+        	"4".equals(getInterchangeHeader().getSyntaxIdentifier().getVersionNum())) {
         	defaultDelimiters = UNEdifactInterchangeParser.defaultUNEdifactDelimitersVer41;
         }
 
