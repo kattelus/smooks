@@ -15,12 +15,13 @@
 */
 package org.milyn.javabean.decoders;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.milyn.edisax.model.internal.Delimiters;
-import org.milyn.edisax.unedifact.UNEdifactInterchangeParser;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+
+import org.junit.Test;
+import org.milyn.edisax.model.internal.Delimiters;
+import org.milyn.edisax.unedifact.UNEdifactInterchangeParser;
 
 /**
  * @author <a href="mailto:tom.fennelly@gmail.com">tom.fennelly@gmail.com</a>
@@ -46,6 +47,12 @@ public class DABigDecimalDecoderTest {
     public void test_encode_decimal_point_dot() {
         DABigDecimalDecoder decoder = new DABigDecimalDecoder();
         assertEquals("1.1", decoder.encode(BigDecimal.valueOf(11, 1), DOT_DEC_DELIMITERS));
+    }
+
+    @Test
+    public void test_encode_decimal_point_dot_long() {
+        DABigDecimalDecoder decoder = new DABigDecimalDecoder();
+        assertEquals("1.1234", decoder.encode(BigDecimal.valueOf(1.1234), DOT_DEC_DELIMITERS));
     }
 
     @Test

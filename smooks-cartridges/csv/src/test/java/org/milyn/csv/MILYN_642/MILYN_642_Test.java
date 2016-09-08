@@ -13,7 +13,7 @@
 	See the GNU Lesser General Public License for more details:
 	http://www.gnu.org/licenses/lgpl.txt
 */
-package org.milyn.csv;
+package org.milyn.csv.MILYN_642;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -72,10 +72,11 @@ public class MILYN_642_Test {
     public void test_03() throws SmooksException, IOException, SAXException {
         Smooks smooks = new Smooks();
 		
+        /*
         smooks.setReaderConfig(
             new CSVRecordParserConfigurator("name,email")
                 .setEscapeChar('~'));
-
+		*/
         ExecutionContext context = smooks.createExecutionContext();
         String result = SmooksUtil.filterAndSerialize(context, getClass().getResourceAsStream("MILYN_642/test-02-data.csv"), smooks);
 		

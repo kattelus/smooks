@@ -15,33 +15,33 @@
 */
 package org.milyn.javabean.decoders;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
+
+import org.milyn.container.ExecutionContext;
+import org.milyn.delivery.Filter;
 import org.milyn.edisax.model.internal.Delimiters;
 import org.milyn.javabean.DataDecodeException;
 import org.milyn.javabean.DecodeType;
-import org.milyn.delivery.Filter;
-import org.milyn.container.ExecutionContext;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 
 /**
  * {@link BigDecimal} Decoder, which is EDI delimiters aware for parsing decimal.
- * 
+ *
  * @author <a href="mailto:sinfomicien@gmail.com">sinfomicien@gmail.com</a>
  * @author <a href="mailto:michael@krueske.net">michael@krueske.net</a> (patched to ensure that always a {@link BigDecimal} value is decoded)
  */
 @DecodeType(BigDecimal.class)
 public class DABigDecimalDecoder extends BigDecimalDecoder {
 
+    @Override
     public Object decode(String data) throws DataDecodeException {
         DecimalFormat decimalFormat = getDecimalFormat();
         setDecimalPointFormat(decimalFormat, getContextDelimiters());
-        
+
         final Number number;
         try {
             number = decimalFormat.parse(data.trim());
@@ -49,10 +49,11 @@ public class DABigDecimalDecoder extends BigDecimalDecoder {
             throw new DataDecodeException("Failed to decode BigDecimal value '" + data
                     + "' using NumberFormat instance " + decimalFormat + ".", e);
         }
-        
-        return (BigDecimal) number;
+
+        return number;
     }
 
+    @Override
     public String encode(Object object) throws DataDecodeException {
         DecimalFormat decimalFormat = getDecimalFormat();
         return decimalFormat.format(object);
@@ -62,13 +63,19 @@ public class DABigDecimalDecoder extends BigDecimalDecoder {
     public String encode(Object object, Delimiters interchangeDelimiters) throws DataDecodeException {
         DecimalFormat decimalFormat = getDecimalFormat();
         setDecimalPointFormat(decimalFormat, interchangeDelimiters);
+        // Let's not limit fraction digits but use digits from actual BigDecimal scale
+        decimalFormat.setMaximumFractionDigits(Math.max(
+                ((BigDecimal) object).stripTrailingZeros().scale(),
+                decimalFormat.getMaximumFractionDigits()));
+        decimalFormat.setRoundingMode(RoundingMode.UNNECESSARY);
+
         return decimalFormat.format(object);
     }
 
     private synchronized DecimalFormat getDecimalFormat() {
         //Check to see if we can use the parent default format
         NumberFormat parentNumberFormat = getNumberFormat();
-        
+
         if (parentNumberFormat != null && parentNumberFormat instanceof DecimalFormat) {
             // Clone because we potentially need to modify the decimal point...
             return (DecimalFormat) parentNumberFormat.clone();
